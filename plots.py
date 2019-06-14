@@ -4,11 +4,11 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 N = 20  # punkty kolokacji
-S_max = 30
+S_max = 100
 T = 0.5  # horyzont czasowy
 M = 20 # liczba kroków czasowych
-E = 10
-r = 0.05
+E = 1
+r = 0.5
 sigma = 0.2
 
 aV = analytical(N, S_max, T, M, E, r, sigma)

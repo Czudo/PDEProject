@@ -28,6 +28,26 @@ def meshfree(N, S_max, T, M, E, r, sigma, theta, c):
 
     return V
 
+def meshfreeStability(N, S_max, T, M, E, r, sigma, theta, c):
+    V = np.zeros([N, M])
+
+    phi = np.zeros([N, N])
+    R = np.zeros([N, N])
+
+    dS = S_max / N
+    dt = T / M
+
+    time = np.arange(dt, T+dt, dt)
+    S = np.arange(dS, S_max+dS, dS)
+    temp=S-E
+    V[:, M-1] = [k if k > 0 else 0 for k in temp]  # Call - (max(S-E, 0)), Put - (max(E-S,0))
+    for i in range(N):
+        for j in range(N):
+            phi[i, j] = np.exp(-np.abs(S[i]-S[j])**2/c**2)
+            R[i, j] = 1/2*sigma**2*S[i]**2*((4*(S[i]-S[j])**2-2*c**2)/c**4)*phi[i,j] + r*S[i]*(-2*(S[i]-S[j])/c**2)*phi[i,j] +r*phi[i,j]
+
+    return np.matmul(R, np.linalg.inv(phi))
+
 
 if __name__=='__main__':
     #  initial conditions
