@@ -1,6 +1,4 @@
 import numpy as np
-import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D
 from scipy.stats import norm
 
 
@@ -22,14 +20,12 @@ def analytical(N, S_max, T, M, E, r, sigma):
     return V
 
 
-if __name__=='__main__':
-    # V - cena opcji
+if __name__ == '__main__':
 
-    #  initial conditions
-    N = 121  # punkty kolokacji
+    N = 121
     S_max = 30
-    T = 0.5  # horyzont czasowy
-    M = 100  # liczba kroków czasowych
+    T = 0.5
+    M = 100
     E = 10
     r = 0.05
     sigma = 0.2

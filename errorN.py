@@ -3,10 +3,10 @@ from meshfree import meshfree
 import numpy as np
 import matplotlib.pyplot as plt
 
-N = np.arange(30, 100, 5) # punkty kolokacji
+N = np.arange(50, 150, 10)
 S_max = 100
-T = 0.5  # horyzont czasowy
-M = np.arange(30, 100, 5) # liczba kroków czasowych
+T = 0.5
+M = np.arange(50, 150, 10)
 E = 10
 r = 0.05
 sigma = 0.2
@@ -14,7 +14,7 @@ sigma = 0.2
 e = np.zeros(len(N))
 theta = 0.5
 
-c = 0.5  # shape parameter
+c = 0.5
 
 for i in range(len(N)):
     aV = analytical(N[i], S_max, T, M[i], E, r, sigma)
@@ -35,8 +35,8 @@ fig = plt.figure()
 plt.loglog(N*M, e, '-o', label='error')
 plt.loglog(N*M, (N*M)**a*10**b, label='regression, a='+str(a)[0:5]+', b='+str(b)[0:4])
 plt.legend()
+
 plt.xlabel(r'number of points, $N\cdot M$')
 plt.ylabel(r'max error, $e(N\cdot M)$')
+plt.yticks([np.min(e), np.max(e)])
 plt.show()
-
-print((log_e[-1]-log_e[0])/(log_NM[0]-log_NM[-1]))

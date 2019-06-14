@@ -3,19 +3,19 @@ from meshfree import meshfree
 import numpy as np
 import matplotlib.pyplot as plt
 
-N = 20  # punkty kolokacji
+N = 20
 S_max = 100
-T = 0.5  # horyzont czasowy
-M = 20 # liczba kroków czasowych
+T = 0.5
+M = 20
 E = 1
 r = 0.5
 sigma = 0.2
 
-aV = analytical(N, S_max, T, M, E, r, sigma)
-
 theta = 0.25
 h = (S_max-S_max/N)/(N-1)
-c = 2*h  # shape parameter (????)
+c = 2*h
+
+aV = analytical(N, S_max, T, M, E, r, sigma)
 mV = meshfree(N, S_max, T, M, E, r, sigma, theta, c)
 
 dS = S_max / N
@@ -36,7 +36,7 @@ ax.set_ylabel(r'$S$')
 ax.set_zlabel(r'$V(S,t)$')
 ax.view_init(azim=10)
 
-fig.savefig("3Dplot.png")
+plt.show()
 
 e = np.abs(aV-mV)
 
@@ -45,4 +45,4 @@ fig = plt.figure()
 plt.plot(S, e[:, 0], 'o')
 plt.xlabel(r'$S$')
 plt.ylabel(r'$e(S,t=0)$')
-#fig.savefig("error_t0.png")
+plt.show()
