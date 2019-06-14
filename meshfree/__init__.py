@@ -1,5 +1,6 @@
 import numpy as np
 
+
 def meshfree(N, S_max, T, M, E, r, sigma, theta, c):
     V = np.zeros([N, M])
 
@@ -13,7 +14,6 @@ def meshfree(N, S_max, T, M, E, r, sigma, theta, c):
     S = np.arange(dS, S_max+dS, dS)
     temp=S-E
     V[:, M-1] = [k if k > 0 else 0 for k in temp]  # Call - (max(S-E, 0)), Put - (max(E-S,0))
-    print(V[:,M-1])
     for i in range(N):
         for j in range(N):
             phi[i, j] = np.exp(-np.abs(S[i]-S[j])**2/c**2)
